@@ -19,20 +19,21 @@ function TodoList() {
                 <tbody>
                     {
                         todos.map((todo, index) => {
-                            let style = {}
+                            let textDecoration = {}, completedTodo = {};
                             if (todo.completed) {
-                                style = {
+                                textDecoration = {
                                     "text-decoration": "line-through"
+                                }
+                                completedTodo = {
+                                    opacity: 0.5
                                 }
                             }
                             return <tr key={todo.id}>
-                                <td style={style}>{index + 1}</td>
-                                <td style={style}>{todo.text}</td>
-                                {
-                                    todo.completed === false && <td>
-                                        <button className="btn btn-class btn-primary" onClick={() => dispatch(doneTodo(todo.id))}>Done</button>
-                                    </td>
-                                }
+                                <td style={textDecoration}>{index + 1}</td>
+                                <td style={textDecoration}>{todo.text}</td>
+                                <td>
+                                    <button style={completedTodo} className="btn btn-class btn-primary" onClick={() => todo.completed === false && dispatch(doneTodo(todo.id))}>Done</button>
+                                </td>
                             </tr>
                         })
                     }
